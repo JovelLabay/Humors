@@ -9,7 +9,10 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 
 // DRAWER
-import MyDrawer from "./screens/MyDrawer";
+import MyDrawer from "./screens/Drawer/MyDrawer";
+
+// NATIVE BASE
+import { NativeBaseProvider } from "native-base";
 
 // EXPORT DEFAULT
 export default function App() {
@@ -27,7 +30,9 @@ export default function App() {
   } else {
     return (
       <NavigationContainer>
-        <MyDrawer />
+        <NativeBaseProvider>
+          <MyDrawer />
+        </NativeBaseProvider>
       </NavigationContainer>
     );
   }
