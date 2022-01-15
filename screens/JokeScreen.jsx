@@ -5,13 +5,13 @@ import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
 // COMPONENTS
 import MainNav from "../components/MainNav";
 
-const JokeScreen = () => {
+const JokeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <ScrollView>
           <View>
-            <MainNav />
+            <MainNav navigation={navigation} />
           </View>
         </ScrollView>
       </SafeAreaView>

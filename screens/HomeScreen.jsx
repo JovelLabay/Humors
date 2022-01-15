@@ -9,26 +9,28 @@ import Menus from "../components/Menus";
 // EXPO
 import { StatusBar } from "expo-status-bar";
 
+// STYLES
+import { colors, fontSizes } from "../styles/Styles";
+
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        <ScrollView>
-          <View>
-            <MainNav />
-            <Menus />
-          </View>
-        </ScrollView>
+        <View>
+          <MainNav navigation={navigation} />
+          <Menus navigation={navigation} />
+        </View>
       </SafeAreaView>
       <StatusBar style="dark" />
     </View>
   );
 };
 
+// STYLESHEET
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "green",
+    backgroundColor: colors.mainBackground,
   },
 });
 
