@@ -1,6 +1,6 @@
 // REACT
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
 
 // NATIVE BASE
 import { Box, Container, Text } from "native-base";
@@ -29,35 +29,37 @@ let greeting =
 
 const MainNav = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.leftNav}>
-        <TouchableOpacity onPress={() => navigation.openDrawer()}>
-          <MaterialIcons name="menu" size={26} color="black" />
-        </TouchableOpacity>
-        <View style={styles.titles}>
-          <Text style={styles.titleLogo}>{appJson.expo.name}</Text>
-          <Text style={styles.titleSublogo}>{greeting}</Text>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={styles.leftNav}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <MaterialIcons name="menu" size={26} color="black" />
+          </TouchableOpacity>
+          <View style={styles.titles}>
+            <Text style={styles.titleLogo}>{appJson.expo.name}</Text>
+            <Text style={styles.titleSublogo}>{greeting}</Text>
+          </View>
+        </View>
+        <View style={styles.rightNav}>
+          <TouchableOpacity>
+            <FontAwesome
+              name="heart-o"
+              size={24}
+              color={colors.primary}
+              style={styles.like}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <SimpleLineIcons
+              name="question"
+              size={24}
+              color={colors.primary}
+              // style={styles.like}
+            />
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.rightNav}>
-        <TouchableOpacity>
-          <FontAwesome
-            name="heart-o"
-            size={24}
-            color="black"
-            style={styles.like}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <SimpleLineIcons
-            name="question"
-            size={24}
-            color="black"
-            // style={styles.like}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -84,6 +86,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: fontSizes.header,
     fontFamily: "robotoBold",
+    color: colors.primary,
   },
   titleSublogo: {
     color: colors.secondary,

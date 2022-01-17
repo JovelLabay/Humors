@@ -1,20 +1,23 @@
 // REACT
 import React from "react";
-import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+
+// EXPO
+import { StatusBar } from "expo-status-bar";
 
 // COMPONENTS
 import MainNav from "../components/MainNav";
+import JokeAPi from "../components/JokeApi";
+
+// STYLES
+import { colors, fontSizes } from "../styles/Styles";
 
 const JokeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <SafeAreaView>
-        <ScrollView>
-          <View>
-            <MainNav navigation={navigation} />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <MainNav navigation={navigation} />
+      <JokeAPi />
+      <StatusBar style="dark" />
     </View>
   );
 };
@@ -22,7 +25,7 @@ const JokeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "dodgerblue",
+    backgroundColor: colors.mainBackground,
   },
 });
 

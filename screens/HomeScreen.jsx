@@ -1,6 +1,6 @@
 // REACT
 import React from "react";
-import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 
 // COMPONENTS
 import MainNav from "../components/MainNav";
@@ -15,12 +15,10 @@ import { colors, fontSizes } from "../styles/Styles";
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <SafeAreaView>
-        <View>
-          <MainNav navigation={navigation} />
-          <Menus navigation={navigation} />
-        </View>
-      </SafeAreaView>
+      <MainNav navigation={navigation} />
+      <ScrollView>
+        <Menus navigation={navigation} />
+      </ScrollView>
       <StatusBar style="dark" />
     </View>
   );

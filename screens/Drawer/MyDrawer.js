@@ -27,6 +27,7 @@ import {
 } from "@expo/vector-icons";
 
 import { Avatar } from "native-base";
+import JokeApi from "../../components/JokeApi";
 
 // HOME SCREEN
 function Home({ navigation }) {
@@ -110,16 +111,17 @@ export default function MyDrawer() {
       screenOptions={{
         // PROPS FOR THE DRAWER
         header: () => null,
-
         // STYLESHEETS FOR THE DRAWER
         drawerStyle: {
           paddingHorizontal: 20,
           paddingVertical: 30,
+          backgroundColor: colors.mainBackground,
         },
         drawerActiveBackgroundColor: colors.secondary,
         drawerActiveTintColor: colors.mainBackground,
         drawerInactiveTintColor: colors.primary,
         drawerType: "back",
+        overlayColor: colors.mainBackground,
       }}
     >
       <Drawer.Screen
