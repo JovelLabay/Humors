@@ -66,7 +66,7 @@ const QuotemainApi = ({ navigation, styles }) => {
           mt="2"
         >
           <Text style={styles.mainAuth}>
-            {author === "" ? "- Unknown" : `- ${author}`}
+            {author === "" ? "- Unknowned" : `- ${author}`}
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Quote")}>
             <Center size="12" bg={colors.secondary} rounded="full">

@@ -1,11 +1,10 @@
 // REACT
-import React, { useStae } from "react";
+import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
-  ScrollView,
+  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 
@@ -20,36 +19,40 @@ import {
   Avatar,
 } from "native-base";
 
-// EXPO
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-// STYLES
-import { colors, fontSizes } from "../styles/Styles";
-
 // ICONS
 import { MaterialIcons } from "@expo/vector-icons";
 
-// COMPONENTS
-import MainNav from "../components/MainNav";
-import { color } from "react-native-reanimated";
+// STYLES
+import { colors, fontSizes } from "../../styles/Styles";
 
-function Momo({ navigation }) {
+const JokeApi = ({ navigation }) => {
   const flags = [
-    { id: 10, name: "NSFW", data: "nsfw" },
-    { id: 20, name: "Religious", data: "religious " },
-    { id: 30, name: "Politics", data: "political " },
-    { id: 40, name: "Racist", data: "racist " },
-    { id: 50, name: "Sexist", data: "sexist " },
-    { id: 60, name: "Explicit", data: "explicit" },
+    { id: 10, name: "NSFW", flags: "nsfw" },
+    { id: 20, name: "Religious", flags: "religious" },
+    { id: 30, name: "Politics", flags: "political" },
+    { id: 40, name: "Racist", flags: "racist" },
+    { id: 50, name: "Sexist", flags: "sexist" },
+    { id: 60, name: "Explicit", flags: "explicit" },
   ];
 
   return (
-    <View style={styles.container}>
-      <Text onPress={() => navigation.navigate("Mama")}>dsfsdfs</Text>
+    <>
+      {/* SEARCH */}
+      <View>
+        <TextInput
+          style={styles.search}
+          placeholder="Search categories here..."
+        />
+      </View>
+      {/* SELECT FAVORTE JOKE */}
+      <Text style={styles.mainTitle}>Select your favorite joke</Text>
       <VStack>
         <Flex flexDirection="row" flexWrap="wrap" justifyContent="center">
           {flags.map((theFlags) => (
-            <TouchableOpacity key={theFlags.id}>
+            <TouchableOpacity
+              key={theFlags.id}
+              onPress={() => navigation.navigate("Generate Joke", theFlags)}
+            >
               <Center
                 height="40"
                 width="100"
@@ -112,40 +115,33 @@ function Momo({ navigation }) {
           ))}
         </Flex>
       </VStack>
-    </View>
+    </>
   );
-}
-function Mama({ navigation }) {
-  return (
-    <View style={{ paddingTop: 50 }}>
-      <Text onPress={() => navigation.goBack()}>sdlkfdghfghdfghfjsd</Text>
-    </View>
-  );
-}
+};
 
-const Stack = createNativeStackNavigator();
-
-export default function JokeApi() {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        header: () => null,
-        gestureEnabled: false,
-      }}
-    >
-      <Stack.Screen name="Momo" component={Momo} />
-      <Stack.Screen name="Mama" component={Mama} />
-    </Stack.Navigator>
-  );
-}
+export default JokeApi;
 
 // STYLESHEET
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.mainBackground,
+  search: {
+    marginVertical: 15,
+    borderWidth: 2,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    borderRadius: 15,
+    borderColor: colors.primary,
+    fontFamily: "robotoRegular",
+    color: colors.primary,
+    fontSize: fontSizes.regular,
+    width: "90%",
+    alignSelf: "center",
   },
-  icons: {
-    backgroundColor: colors.secondary,
+  mainTitle: {
+    marginBottom: 10,
+    fontSize: fontSizes.header,
+    fontFamily: "robotoMedium",
+    color: colors.primary,
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
 });

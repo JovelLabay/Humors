@@ -61,7 +61,7 @@ const JokeMainApi = ({ navigation, styles }) => {
         >
           {/* THE CATEGORY */}
           <Text style={styles.mainAuth}>
-            {jokeCat === "" ? "-" : `- ${jokeCat}`}
+            {jokeCat === "" ? "- Unknowned" : `- ${jokeCat}`}
           </Text>
           <TouchableOpacity onPress={() => navigation.navigate("Joke")}>
             <Center size="12" bg={colors.secondary} rounded="full">

@@ -1,35 +1,37 @@
 // REACT
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 // STYLES
 import { colors, fontSizes } from "../styles/Styles";
 
 import JokeMainApi from "./JokeMainApi";
-import QuotemainApi from "./QuoteMainApi";
+import QuoteMainApi from "./QuoteMainApi";
 import BibleMainApi from "./BibleMainApi";
 
 const Menus = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      {/* JOKE */}
-      <View style={styles.mainIntro}>
-        <Text style={styles.mainTitle}>For today's joke</Text>
-        <JokeMainApi styles={styles} navigation={navigation} />
-      </View>
+    <ScrollView>
+      <View style={styles.container}>
+        {/* JOKE */}
+        <View style={styles.mainIntro}>
+          <Text style={styles.mainTitle}>For today's joke</Text>
+          <JokeMainApi styles={styles} navigation={navigation} />
+        </View>
 
-      {/* QUOTE */}
-      <View style={styles.mainIntro}>
-        <Text style={styles.mainTitle}>Quote of the day</Text>
-        <QuotemainApi styles={styles} navigation={navigation} />
-      </View>
+        {/* QUOTE */}
+        <View style={styles.mainIntro}>
+          <Text style={styles.mainTitle}>Quote of the day</Text>
+          <QuoteMainApi styles={styles} navigation={navigation} />
+        </View>
 
-      {/* BIBLE */}
-      <View style={styles.mainIntro}>
-        <Text style={styles.mainTitle}>Your bible verse for today</Text>
-        <BibleMainApi styles={styles} />
+        {/* BIBLE */}
+        <View style={styles.mainIntro}>
+          <Text style={styles.mainTitle}>Your bible verse for today</Text>
+          <BibleMainApi styles={styles} />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

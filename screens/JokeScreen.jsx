@@ -6,17 +6,15 @@ import { StyleSheet, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 // COMPONENTS
-import MainNav from "../components/MainNav";
-import JokeAPi from "../components/JokeApi";
+import Joke from "../components/Jokes/Joke";
 
 // STYLES
-import { colors, fontSizes } from "../styles/Styles";
+import { colors } from "../styles/Styles";
 
-const JokeScreen = ({ navigation }) => {
+const JokeScreen = () => {
   return (
     <View style={styles.container}>
-      <MainNav navigation={navigation} />
-      <JokeAPi />
+      <Joke />
       <StatusBar style="dark" />
     </View>
   );

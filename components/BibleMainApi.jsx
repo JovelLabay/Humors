@@ -71,9 +71,7 @@ const Menus = ({ styles }) => {
           mt="2"
         >
           <Text style={styles.mainAuthBible}>
-            {bibleVerse === ""
-              ? "Select the right plan for you. As low as $0.99."
-              : bibleBook}
+            {bibleVerse === "" ? "Jesus is not around." : bibleBook}
           </Text>
         </Flex>
       </Box>

@@ -4,21 +4,19 @@ import { StyleSheet, ScrollView, View } from "react-native";
 
 // COMPONENTS
 import MainNav from "../components/MainNav";
-import Menus from "../components/Menus";
+import Home from "../components/Home";
 
 // EXPO
 import { StatusBar } from "expo-status-bar";
 
 // STYLES
-import { colors, fontSizes } from "../styles/Styles";
+import { colors } from "../styles/Styles";
 
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <MainNav navigation={navigation} />
-      <ScrollView>
-        <Menus navigation={navigation} />
-      </ScrollView>
+      <Home navigation={navigation} />
       <StatusBar style="dark" />
     </View>
   );

@@ -1,6 +1,6 @@
 // REACT NATIVE
 import React from "react";
-import { Linking, Text, View } from "react-native";
+import { Linking, Settings, Text, View } from "react-native";
 
 // NAVIGATOR
 import {
@@ -14,6 +14,7 @@ import {
 import JokeScreen from "../JokeScreen";
 import QuoteScreen from "../QuoteScreen";
 import HomeScreen from "../HomeScreen";
+import SettingScreen from "../SettingScreen";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
@@ -27,7 +28,6 @@ import {
 } from "@expo/vector-icons";
 
 import { Avatar } from "native-base";
-import JokeApi from "../../components/JokeApi";
 
 // HOME SCREEN
 function Home({ navigation }) {
@@ -43,6 +43,10 @@ function Joke({ navigation }) {
 function Quote({ navigation }) {
   return <QuoteScreen navigation={navigation} />;
 }
+// SETTINGS SCREEN
+function Setting({ navigation }) {
+  return <SettingScreen navigation={navigation} />;
+}
 
 // ADDITIONAL DRAWER MENU
 function Help(props) {
@@ -50,7 +54,7 @@ function Help(props) {
     <DrawerContentScrollView {...props}>
       {/* DRAWER TITLE */}
       <View style={{ padding: 30, alignItems: "center" }}>
-        <Avatar bg="gray.100" size="xl">
+        <Avatar bg="gray.500" size="xl">
           Logo
         </Avatar>
         <Text
@@ -60,7 +64,7 @@ function Help(props) {
             color: colors.secondary,
           }}
         >
-          Humors you loved.
+          Humors you loved
         </Text>
       </View>
       <DrawerItemList {...props} />
@@ -76,7 +80,7 @@ function Help(props) {
         labelStyle={{
           color: colors.primary,
         }}
-        label=" Help"
+        label="Help"
         icon={() => (
           <SimpleLineIcons name="question" size={22} color={colors.primary} />
         )}
@@ -92,9 +96,29 @@ function Help(props) {
         labelStyle={{
           color: colors.primary,
         }}
-        label=" Read Policy"
+        label="Read Policy"
         icon={() => (
           <Ionicons name="document-outline" size={24} color={colors.primary} />
+        )}
+      />
+
+      {/* READ HATRED */}
+      <DrawerItem
+        onPress={() => alert("sdfsd")}
+        style={{
+          borderWidth: 2,
+          borderColor: colors.secondary,
+        }}
+        labelStyle={{
+          color: colors.primary,
+        }}
+        label="Void Emotion"
+        icon={() => (
+          <Ionicons
+            name="stop-circle-outline"
+            size={24}
+            color={colors.primary}
+          />
         )}
       />
     </DrawerContentScrollView>
@@ -160,6 +184,20 @@ export default function MyDrawer() {
           drawerIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="format-quote-open-outline"
+              size={22}
+              color={focused ? colors.mainBackground : colors.primary}
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Setting"
+        component={Setting}
+        options={{
+          title: "Setting",
+          drawerIcon: ({ focused }) => (
+            <MaterialCommunityIcons
+              name="cellphone-settings"
               size={22}
               color={focused ? colors.mainBackground : colors.primary}
             />

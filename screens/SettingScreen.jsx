@@ -8,7 +8,7 @@ import { StatusBar } from "expo-status-bar";
 // COMPONENTS
 import MainNav from "../components/MainNav";
 
-const QuoteScreen = ({ navigation }) => {
+const SettingScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <MainNav navigation={navigation} />
@@ -20,8 +20,8 @@ const QuoteScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "gold",
+    backgroundColor: "pink",
   },
 });
 
-export default QuoteScreen;
+export default SettingScreen;
