@@ -11,11 +11,9 @@ import {
 // NATIVE BASE
 import {
   Center,
-  Input,
   VStack,
   Heading,
   Flex,
-  Divider,
   Avatar,
 } from "native-base";
 

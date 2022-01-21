@@ -12,7 +12,6 @@ import SelectJokeEvent from "../events/SelectJokeEvent";
 // COMPONENTS
 import MainNav from "../../components/MainNav";
 import GenerateJokeEvent from "../events/GenerateJokeEvent";
-import ResultJokeEvent from "../events/ResultJokeEvent";
 
 // SELECT JOKE
 function SelectJoke({ navigation }) {
@@ -42,18 +41,6 @@ function GenerateJoke({ navigation, route }) {
     </View>
   );
 }
-// RESULT JOKE
-function ResultJoke({ route }) {
-  return (
-    <View style={styles.container}>
-      <ScrollView>
-        <View style={styles.mainIntro}>
-          <ResultJokeEvent route={route} />
-        </View>
-      </ScrollView>
-    </View>
-  );
-}
 
 const Stack = createNativeStackNavigator();
 
@@ -74,23 +61,6 @@ export default function Joke() {
       <Stack.Screen
         name="Generate Joke"
         component={GenerateJoke}
-        options={{
-          headerStyle: {
-            backgroundColor: colors.mainBackground,
-          },
-          headerTintColor: colors.primary,
-          headerTitleStyle: {
-            fontFamily: "robotoRegular",
-          },
-          headerBackTitleStyle: {
-            fontFamily: "robotoLight",
-          },
-          headerBackTitleVisible: false,
-        }}
-      />
-      <Stack.Screen
-        name="Result Joke"
-        component={ResultJoke}
         options={{
           headerStyle: {
             backgroundColor: colors.mainBackground,

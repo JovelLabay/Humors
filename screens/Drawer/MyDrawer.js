@@ -1,6 +1,6 @@
 // REACT NATIVE
 import React from "react";
-import { Linking, Settings, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 // NAVIGATOR
 import {

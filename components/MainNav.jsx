@@ -1,9 +1,9 @@
 // REACT
-import React, { useState } from "react";
+import React from "react";
 import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
 
 // NATIVE BASE
-import { Box, Container, Text } from "native-base";
+import { Text } from "native-base";
 
 // STYLES
 import { colors, fontSizes } from "../styles/Styles";

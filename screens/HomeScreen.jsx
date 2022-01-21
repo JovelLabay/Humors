@@ -1,10 +1,13 @@
 // REACT
 import React from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 // COMPONENTS
 import MainNav from "../components/MainNav";
 import Home from "../components/Home";
+
+// ADS COMPONENT
+import Ads from "../components/Ads/Ads";
 
 // EXPO
 import { StatusBar } from "expo-status-bar";
@@ -17,6 +20,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <MainNav navigation={navigation} />
       <Home navigation={navigation} />
+      <Ads />
       <StatusBar style="dark" />
     </View>
   );
