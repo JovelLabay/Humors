@@ -1,6 +1,12 @@
 // REACT
 import React from "react";
-import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Modal,
+} from "react-native";
 
 // NATIVE BASE
 import { Text } from "native-base";
@@ -41,7 +47,7 @@ const MainNav = ({ navigation }) => {
           </View>
         </View>
         <View style={styles.rightNav}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("Loved")}>
             <FontAwesome
               name="heart-o"
               size={24}

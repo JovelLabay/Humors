@@ -14,7 +14,7 @@ import {
 import { MaterialIcons, EvilIcons, FontAwesome } from "@expo/vector-icons";
 
 // NATIVE BASE
-import { Center } from "native-base";
+import { Center, useToast } from "native-base";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
@@ -41,12 +41,14 @@ const ResultJokeEvent = ({
   theWays,
   outComeResultSafe,
   theJokes,
+  error,
+  setError,
 }) => {
   // SHARE
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: theJokes + "\n" + "\n" + "Developed by: " + appJson.expo.name,
+        message: `${theJokes}\n\nDeveloped by: ${appJson.expo.name}`,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -63,16 +65,23 @@ const ResultJokeEvent = ({
   };
 
   // TIMER
-  if (outComeResultCategory === "") {
+  if (error === true) {
     setTimeout(() => {
-      Alert.alert("Network error occured", "Your connection timeout", [
+      Alert.alert("Netwrok request failed", "The connection has time out.", [
         {
-          text: "Close",
-          onPress: () => setModalResultJoke(false),
+          text: "Try Again",
+          onPress: () => {
+            setModalResultJoke(false),
+              setError(false),
+              setOutComeResultCategory("");
+          },
         },
       ]);
-    }, 5000);
+    }, 2000);
   }
+
+  // LIKE ME
+  const toast = useToast();
 
   return (
     <>
@@ -160,7 +169,13 @@ const ResultJokeEvent = ({
                   />
                 </Center>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  toast.show({
+                    description: "fefrfrf",
+                  })
+                }
+              >
                 <Center
                   size="12"
                   bg={colors.secondary}

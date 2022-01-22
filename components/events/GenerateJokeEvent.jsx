@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Modal,
   StatusBar,
+  Alert,
 } from "react-native";
 
 // NATIVE BASE
@@ -36,6 +37,7 @@ const GenerateJokeEvent = ({ route }) => {
   const [outComeResultCategory, setOutComeResultCategory] = useState("");
   const [outComeResultFlags, setOutComeResultFlags] = useState("");
   const [outComeResultSafe, setOutComeResultSafe] = useState("");
+  const [error, setError] = useState(false);
 
   //THE JOKES OR DELIVERY
   const [theJokes, setTheJokes] = useState("");
@@ -57,27 +59,39 @@ const GenerateJokeEvent = ({ route }) => {
         `https://v2.jokeapi.dev/joke/${catName}?blacklistFlags=${flags}${theWays.jokeWaysData}`
       );
       const json = await res.json();
-      const { category, safe, joke, delivery, setup, type } = json;
+      const { category, safe, joke, delivery, setup, type, error } = json;
+
       // CATEGORY
       setOutComeResultCategory(category);
+
       // FLAGS
       setOutComeResultFlags(flags);
+
       // SAFE
       setOutComeResultSafe(
-        safe === true ? "Safe for minors" : "Parental guidance"
+        safe === true
+          ? "Safe for minors"
+          : safe === false
+          ? "Parental guidance"
+          : "Unknowned"
       );
       // THE JOKES OR DELIVERY
       const lolo = type === "twopart" ? setup + "\n" + delivery : joke;
       setTheJokes(lolo);
+
+      // ERROR
+      setError(error);
     } catch (error) {
       setTimeout(() => {
-        alert(error.message);
+        Alert.alert(`${error.message}`, `Check you internet connection.`, [
+          {
+            text: "Try Again",
+            onPress: () => setModalResultJoke(false),
+          },
+        ]);
       }, 2000);
     }
   };
-
-  // BER MONTHS
-  const berMonths = 12;
 
   return (
     <>
@@ -130,7 +144,7 @@ const GenerateJokeEvent = ({ route }) => {
             <TouchableOpacity
               onPress={() => {
                 setModalResultJoke(true);
-                // sample(theCategory.catName, flags, theWays);
+                sample(theCategory.catName, flags, theWays);
               }}
             >
               <Center size="12" bg={colors.secondary} rounded="full">
@@ -178,6 +192,8 @@ const GenerateJokeEvent = ({ route }) => {
               theWays={theWays}
               outComeResultSafe={outComeResultSafe}
               theJokes={theJokes}
+              error={error}
+              setError={setError}
             />
           </ScrollView>
         </View>

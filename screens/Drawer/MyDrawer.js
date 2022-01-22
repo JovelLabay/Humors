@@ -14,7 +14,7 @@ import {
 import JokeScreen from "../JokeScreen";
 import QuoteScreen from "../QuoteScreen";
 import HomeScreen from "../HomeScreen";
-import SettingScreen from "../SettingScreen";
+import LovedScreen from "../LovedScreen";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
@@ -43,9 +43,9 @@ function Joke({ navigation }) {
 function Quote({ navigation }) {
   return <QuoteScreen navigation={navigation} />;
 }
-// SETTINGS SCREEN
-function Setting({ navigation }) {
-  return <SettingScreen navigation={navigation} />;
+// LOVED SCREEN
+function Loved({ navigation }) {
+  return <LovedScreen navigation={navigation} />;
 }
 
 // ADDITIONAL DRAWER MENU
@@ -191,10 +191,10 @@ export default function MyDrawer() {
         }}
       />
       <Drawer.Screen
-        name="Setting"
-        component={Setting}
+        name="Loved"
+        component={Loved}
         options={{
-          title: "Setting",
+          title: "Loved",
           drawerIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="cellphone-settings"
