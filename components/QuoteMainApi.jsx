@@ -22,10 +22,10 @@ const QuotemainApi = ({ navigation, styles }) => {
   const options = {
     method: "GET",
     url: "https://quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com/quote",
-    params: {token: "ipworld.info"},
+    params: { token: "ipworld.info" },
     headers: {
       "x-rapidapi-host":
-          "quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com",
+        "quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com",
       "x-rapidapi-key": "c2b0993224msh0961482e3933db6p17f5c2jsnaf06dfbc4de1",
     },
   };

@@ -1,6 +1,8 @@
 // REACT NATIVE
-import React from "react";
+import React, { useState } from "react";
 import { Text, View } from "react-native";
+
+import * as WebBrowser from "expo-web-browser";
 
 // NAVIGATOR
 import {
@@ -27,7 +29,7 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 
-import { Avatar } from "native-base";
+import { Avatar, Image } from "native-base";
 
 // HOME SCREEN
 function Home({ navigation }) {
@@ -50,13 +52,23 @@ function Loved({ navigation }) {
 
 // ADDITIONAL DRAWER MENU
 function Help(props) {
+  // Image logo
+  const logoImage = require("../../assets/Humors.png");
+
+  const [result, setResult] = useState(null);
+
+  const handlePressButtonAsync = async () => {
+    let result = await WebBrowser.openBrowserAsync(
+      "https://jovellabay.vercel.app"
+    );
+    setResult(result);
+  };
+
   return (
     <DrawerContentScrollView {...props}>
       {/* DRAWER TITLE */}
       <View style={{ padding: 30, alignItems: "center" }}>
-        <Avatar bg="gray.500" size="xl">
-          Logo
-        </Avatar>
+        <Image alt="logo" source={logoImage} borderRadius={100} size="lg" />
         <Text
           style={{
             marginVertical: 5,
@@ -71,7 +83,7 @@ function Help(props) {
 
       {/* HELP */}
       <DrawerItem
-        onPress={() => alert("sdfdf")}
+        onPress={() => handlePressButtonAsync()}
         style={{
           borderWidth: 2,
           borderColor: colors.secondary,
