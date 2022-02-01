@@ -1,5 +1,5 @@
 // REACT
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -14,7 +14,7 @@ import {
 import { MaterialIcons, EvilIcons, FontAwesome } from "@expo/vector-icons";
 
 // NATIVE BASE
-import { Center, useToast } from "native-base";
+import { Center } from "native-base";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
@@ -24,6 +24,10 @@ import appJson from "../../app.json";
 
 // LOADER
 import { GenerateCustomJoke } from "../Loader/Loader";
+
+// FIREBASE FIRESTORE
+import { storage } from "../../firebase/firebase.config";
+import { collection, addDoc } from "firebase/firestore";
 
 // BACKGROUND IMAGES
 const christmas = require("../../assets/images/Jokes/Christmas.jpg");
@@ -81,7 +85,26 @@ const ResultJokeEvent = ({
   }
 
   // LIKE ME
-  const toast = useToast();
+  const [like, setLike] = useState("heart-o");
+  const liked = async () => {
+    // PASS DATA
+    const category = outComeResultCategory;
+    const joke = theJokes;
+    const flags = outComeResultFlags;
+    const ways = theWays.theWaysName;
+    const safe = outComeResultSafe;
+    try {
+      await addDoc(collection(storage, category), {
+        joke: joke,
+        flags: flags,
+        ways: ways,
+        safe: safe,
+      });
+      alert("saved");
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   return (
     <>
@@ -129,29 +152,29 @@ const ResultJokeEvent = ({
                 </TouchableOpacity>
 
                 {/* TITLE FOR CATEGORY */}
-                <Text style={styles.title2}>{outComeResultCategory}</Text>
+                <Text style={styles.title2}>{outComeResultCategory}sfsdf</Text>
               </View>
             </ImageBackground>
           </View>
           <View style={styles.bottom}>
-            <Text style={styles.joke}>{theJokes}</Text>
+            <Text style={styles.joke}>{theJokes}sdfsd</Text>
 
             {/* FLAGS */}
             <View style={styles.flags}>
               <Text style={styles.flagsTitle}>Favorite joke: </Text>
-              <Text style={styles.flagsDes}>{outComeResultFlags}</Text>
+              <Text style={styles.flagsDes}>{outComeResultFlags}sdfsd</Text>
             </View>
 
             {/* THE WAYS */}
             <View style={styles.flags}>
               <Text style={styles.flagsTitle}>Joke line: </Text>
-              <Text style={styles.flagsDes}>{theWays.theWaysName}</Text>
+              <Text style={styles.flagsDes}>{theWays.theWaysName}dsfsdf</Text>
             </View>
 
             {/* THE CAUTION */}
             <View style={styles.flags}>
               <Text style={styles.flagsTitle}>Joke caution: </Text>
-              <Text style={styles.flagsDes}>{outComeResultSafe}</Text>
+              <Text style={styles.flagsDes}>{outComeResultSafe}fsdf</Text>
             </View>
 
             <View style={styles.shares}>
@@ -170,11 +193,10 @@ const ResultJokeEvent = ({
                 </Center>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() =>
-                  toast.show({
-                    description: "fefrfrf",
-                  })
-                }
+                onPress={() => {
+                  liked();
+                  setLike("heart");
+                }}
               >
                 <Center
                   size="12"
@@ -183,7 +205,7 @@ const ResultJokeEvent = ({
                   marginX="2.5"
                 >
                   <FontAwesome
-                    name="heart-o"
+                    name={like}
                     size={20}
                     color={colors.mainBackground}
                   />
