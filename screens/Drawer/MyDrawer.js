@@ -29,7 +29,7 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 
-import { Avatar, Image } from "native-base";
+import { Avatar, Badge, Image } from "native-base";
 
 // HOME SCREEN
 function Home({ navigation }) {
@@ -167,7 +167,7 @@ export default function MyDrawer() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Quote"
         component={Quote}
         options={{
@@ -180,7 +180,7 @@ export default function MyDrawer() {
             />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         name="Loved"
         component={Loved}

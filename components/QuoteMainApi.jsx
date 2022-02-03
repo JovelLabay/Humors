@@ -3,7 +3,15 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
 
 // NATIVE BASE
-import { Box, Flex, Center, HStack, Spinner, Heading } from "native-base";
+import {
+  Box,
+  Flex,
+  Center,
+  HStack,
+  Spinner,
+  Heading,
+  Badge,
+} from "native-base";
 
 // ICONS
 import { MaterialIcons } from "@expo/vector-icons";
@@ -68,14 +76,17 @@ const QuotemainApi = ({ navigation, styles }) => {
           <Text style={styles.mainAuth}>
             {author === "" ? "- Unknowned" : `- ${author}`}
           </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Quote")}>
-            <Center size="12" bg={colors.secondary} rounded="full">
+          <TouchableOpacity
+            disabled={true}
+            onPress={() => navigation.navigate("Quote")}
+          >
+            {/* <Center size="12" bg={colors.secondary} rounded="full">
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
                 color={colors.mainBackground}
               />
-            </Center>
+            </Center> */}
           </TouchableOpacity>
         </Flex>
       </Box>

@@ -28,12 +28,12 @@ const CategoryJoke = ({ navigation }) => {
   );
 };
 // RESULT JOKE
-const ResultCategoryJoke = () => {
+const ResultCategoryJoke = ({ route }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
         <View style={styles.mainIntro}>
-          <LovedJokeResult />
+          <LovedJokeResult route={route} />
         </View>
       </ScrollView>
     </View>
@@ -80,13 +80,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   mainIntro: {
-    marginVertical: 10,
-    marginHorizontal: 10,
+    // marginVertical: 10,
+    // marginHorizontal: 10,
   },
   // TITLE
   title: {
     fontSize: fontSizes.title,
     fontFamily: "robotoBold",
     color: colors.primary,
+    marginHorizontal: 10,
   },
 });

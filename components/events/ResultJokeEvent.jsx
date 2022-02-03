@@ -97,7 +97,7 @@ const ResultJokeEvent = ({
     const safe = outComeResultSafe;
     try {
       await addDoc(collection(storage, category), {
-        id: ids,
+        // id: ids,
         joke: joke,
         flags: flags,
         ways: ways,
