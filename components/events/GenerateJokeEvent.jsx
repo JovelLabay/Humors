@@ -20,6 +20,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
 import ResultJokeEvent from "./ResultJokeEvent";
+import { GenerateCustomJoke } from "../Loader/Loader";
 
 const GenerateJokeEvent = ({ route }) => {
   // SELECT YOUR JOKE
@@ -38,6 +39,7 @@ const GenerateJokeEvent = ({ route }) => {
   const [outComeResultFlags, setOutComeResultFlags] = useState("");
   const [outComeResultSafe, setOutComeResultSafe] = useState("");
   const [error, setError] = useState(false);
+  const [id, setId] = useState();
 
   //THE JOKES OR DELIVERY
   const [theJokes, setTheJokes] = useState("");
@@ -59,7 +61,7 @@ const GenerateJokeEvent = ({ route }) => {
         `https://v2.jokeapi.dev/joke/${catName}?blacklistFlags=${flags}${theWays.jokeWaysData}`
       );
       const json = await res.json();
-      const { category, safe, joke, delivery, setup, type, error } = json;
+      const { category, safe, joke, delivery, setup, type, error, id } = json;
 
       // CATEGORY
       setOutComeResultCategory(category);
@@ -78,6 +80,9 @@ const GenerateJokeEvent = ({ route }) => {
       // THE JOKES OR DELIVERY
       const lolo = type === "twopart" ? setup + "\n" + delivery : joke;
       setTheJokes(lolo);
+
+      // ID
+      setId(`${Math.random()}_${id}`);
 
       // ERROR
       setError(error);
@@ -171,17 +176,12 @@ const GenerateJokeEvent = ({ route }) => {
             >{`${name} | ${theWays.theWaysName} | Tap the right chevron`}</Text>
           </View>
         </Flex>
-
-        {/* GENERATE RANDOM */}
-
-        <Button rounded="full" size="10" style={styles.randomBTN}>
-          Get joke randomly
-        </Button>
       </Box>
 
       {/* RESULT JOKE */}
       <StatusBar hidden={modalResultJoke} />
       <Modal visible={modalResultJoke} animationType="slide">
+        {/*TO REFACTOR THE STYLESHEET LATER*/}
         <View style={{ flex: 1, backgroundColor: colors.mainBackground }}>
           <ScrollView>
             <ResultJokeEvent
@@ -194,6 +194,7 @@ const GenerateJokeEvent = ({ route }) => {
               theJokes={theJokes}
               error={error}
               setError={setError}
+              id={id}
             />
           </ScrollView>
         </View>
@@ -242,11 +243,5 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "center",
-  },
-  randomBTN: {
-    marginVertical: 20,
-    width: "70%",
-    alignSelf: "center",
-    backgroundColor: colors.secondary,
   },
 });

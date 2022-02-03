@@ -29,7 +29,7 @@ function SelectJoke({ navigation }) {
   );
 }
 
-// GERATE JOKE
+// GENERATE JOKE
 function GenerateJoke({ navigation, route }) {
   return (
     <View style={styles.container}>
@@ -68,9 +68,6 @@ export default function Joke() {
           headerTintColor: colors.primary,
           headerTitleStyle: {
             fontFamily: "robotoRegular",
-          },
-          headerBackTitleStyle: {
-            fontFamily: "robotoLight",
           },
           headerBackTitleVisible: false,
         }}

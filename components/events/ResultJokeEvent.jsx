@@ -47,6 +47,7 @@ const ResultJokeEvent = ({
   theJokes,
   error,
   setError,
+  id,
 }) => {
   // SHARE
   const onShare = async () => {
@@ -88,6 +89,7 @@ const ResultJokeEvent = ({
   const [like, setLike] = useState("heart-o");
   const liked = async () => {
     // PASS DATA
+    const ids = id;
     const category = outComeResultCategory;
     const joke = theJokes;
     const flags = outComeResultFlags;
@@ -95,12 +97,12 @@ const ResultJokeEvent = ({
     const safe = outComeResultSafe;
     try {
       await addDoc(collection(storage, category), {
+        id: ids,
         joke: joke,
         flags: flags,
         ways: ways,
         safe: safe,
       });
-      alert("saved");
     } catch (error) {
       console.log(error.message);
     }
@@ -152,29 +154,29 @@ const ResultJokeEvent = ({
                 </TouchableOpacity>
 
                 {/* TITLE FOR CATEGORY */}
-                <Text style={styles.title2}>{outComeResultCategory}sfsdf</Text>
+                <Text style={styles.title2}>{outComeResultCategory}</Text>
               </View>
             </ImageBackground>
           </View>
           <View style={styles.bottom}>
-            <Text style={styles.joke}>{theJokes}sdfsd</Text>
+            <Text style={styles.joke}>{theJokes}</Text>
 
             {/* FLAGS */}
             <View style={styles.flags}>
               <Text style={styles.flagsTitle}>Favorite joke: </Text>
-              <Text style={styles.flagsDes}>{outComeResultFlags}sdfsd</Text>
+              <Text style={styles.flagsDes}>{outComeResultFlags}</Text>
             </View>
 
             {/* THE WAYS */}
             <View style={styles.flags}>
               <Text style={styles.flagsTitle}>Joke line: </Text>
-              <Text style={styles.flagsDes}>{theWays.theWaysName}dsfsdf</Text>
+              <Text style={styles.flagsDes}>{theWays.theWaysName}</Text>
             </View>
 
             {/* THE CAUTION */}
             <View style={styles.flags}>
               <Text style={styles.flagsTitle}>Joke caution: </Text>
-              <Text style={styles.flagsDes}>{outComeResultSafe}fsdf</Text>
+              <Text style={styles.flagsDes}>{outComeResultSafe}</Text>
             </View>
 
             <View style={styles.shares}>

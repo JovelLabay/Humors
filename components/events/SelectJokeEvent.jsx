@@ -9,13 +9,7 @@ import {
 } from "react-native";
 
 // NATIVE BASE
-import {
-  Center,
-  VStack,
-  Heading,
-  Flex,
-  Avatar,
-} from "native-base";
+import { Center, VStack, Heading, Flex, Avatar } from "native-base";
 
 // ICONS
 import { MaterialIcons } from "@expo/vector-icons";
@@ -49,6 +43,7 @@ const JokeApi = ({ navigation }) => {
           {flags.map((theFlags) => (
             <TouchableOpacity
               key={theFlags.id}
+              // onPress={() => navigation.navigate("Generate Joke", theFlags)}
               onPress={() => navigation.navigate("Generate Joke", theFlags)}
             >
               <Center

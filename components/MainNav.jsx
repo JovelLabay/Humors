@@ -1,12 +1,6 @@
 // REACT
 import React from "react";
-import {
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Modal,
-} from "react-native";
+import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
 
 // NATIVE BASE
 import { Text } from "native-base";
@@ -15,11 +9,7 @@ import { Text } from "native-base";
 import { colors, fontSizes } from "../styles/Styles";
 
 // ICONS
-import {
-  FontAwesome,
-  SimpleLineIcons,
-  MaterialIcons,
-} from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 
 // UTILITIES
 import appJson from "../app.json";
@@ -46,24 +36,9 @@ const MainNav = ({ navigation }) => {
             <Text style={styles.titleSublogo}>{greeting}</Text>
           </View>
         </View>
-        <View style={styles.rightNav}>
-          <TouchableOpacity onPress={() => navigation.navigate("Loved")}>
-            <FontAwesome
-              name="heart-o"
-              size={24}
-              color={colors.primary}
-              style={styles.like}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <SimpleLineIcons
-              name="question"
-              size={24}
-              color={colors.primary}
-              // style={styles.like}
-            />
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("Loved")}>
+          <FontAwesome name="heart-o" size={24} color={colors.primary} />
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -98,11 +73,5 @@ const styles = StyleSheet.create({
     color: colors.secondary,
     fontFamily: "robotoMedium",
     fontSize: fontSizes.regular,
-  },
-  rightNav: {
-    flexDirection: "row",
-  },
-  like: {
-    marginRight: 10,
   },
 });

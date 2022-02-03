@@ -100,7 +100,6 @@ function Help(props) {
 
       {/* READ POLICY */}
       <DrawerItem
-        onPress={() => alert("sdfsd")}
         style={{
           borderWidth: 2,
           borderColor: colors.secondary,
@@ -111,26 +110,6 @@ function Help(props) {
         label="Read Policy"
         icon={() => (
           <Ionicons name="document-outline" size={24} color={colors.primary} />
-        )}
-      />
-
-      {/* READ HATRED */}
-      <DrawerItem
-        onPress={() => alert("sdfsd")}
-        style={{
-          borderWidth: 2,
-          borderColor: colors.secondary,
-        }}
-        labelStyle={{
-          color: colors.primary,
-        }}
-        label="Void Emotion"
-        icon={() => (
-          <Ionicons
-            name="stop-circle-outline"
-            size={24}
-            color={colors.primary}
-          />
         )}
       />
     </DrawerContentScrollView>

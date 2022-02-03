@@ -18,7 +18,6 @@ import { colors } from "../styles/Styles";
 const loveScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <MainNav navigation={navigation} />
       <LovedJoke />
       <Ads />
       <StatusBar style="dark" />
@@ -29,7 +28,6 @@ const loveScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "dodgerblue",
   },
 });
 

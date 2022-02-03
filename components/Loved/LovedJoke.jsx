@@ -1,39 +1,92 @@
 // REACT
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, ScrollView, FlatList } from "react-native";
 
-import { storage } from "../../firebase/firebase.config";
-import { collection, getDocs } from "firebase/firestore";
+// EXPO
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-const LovedJoke = () => {
-  // READ DATA
-  const colRef = collection(storage, "Dark");
-  getDocs(colRef)
-    .then((results) => {
-      let theJokes = [];
-      results.docs.forEach((result) => {
-        theJokes.push({ ...result.data(), id: result.id });
-      });
+// STYLES
+import { colors, fontSizes } from "../../styles/Styles";
+import MainNav from "../MainNav";
+import LovedJokeResult from "./LovedJokeResult";
 
-      console.log(theJokes);
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
+// COMPONENT
+import JokesCategory from "./JokesCategory";
 
+// CATEGORY JOKE
+const CategoryJoke = ({ navigation }) => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <Text>Sfsdf</Text>
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <MainNav navigation={navigation} />
+      <ScrollView>
+        <View style={styles.mainIntro}>
+          <Text style={styles.title}>Your saved jokes</Text>
+          <JokesCategory navigation={navigation} />
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+// RESULT JOKE
+const ResultCategoryJoke = () => {
+  return (
+    <View style={styles.container}>
+      <ScrollView>
+        <View style={styles.mainIntro}>
+          <LovedJokeResult />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 
+const Stack = createNativeStackNavigator();
+
+export default function LovedJoke() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        gestureEnabled: false,
+      }}
+    >
+      <Stack.Screen
+        name="Category Joke"
+        component={CategoryJoke}
+        options={{
+          header: () => null,
+        }}
+      />
+      <Stack.Screen
+        name="Result Joke"
+        component={ResultCategoryJoke}
+        options={{
+          headerStyle: {
+            backgroundColor: colors.mainBackground,
+          },
+          headerTintColor: colors.primary,
+          headerTitleStyle: {
+            fontFamily: "robotoRegular",
+          },
+          headerBackTitleVisible: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+// STYLESHEET
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  mainIntro: {
+    marginVertical: 10,
+    marginHorizontal: 10,
+  },
+  // TITLE
+  title: {
+    fontSize: fontSizes.title,
+    fontFamily: "robotoBold",
+    color: colors.primary,
+  },
 });
-
-export default LovedJoke;
