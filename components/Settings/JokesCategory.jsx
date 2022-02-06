@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -8,24 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import {
-  HStack,
-  Center,
-  Badge,
-  Box,
-  Avatar,
-  Image,
-  ZStack,
-  AspectRatio,
-  Stack,
-  Heading,
-} from "native-base";
+import { HStack, Badge, Box, Image, AspectRatio } from "native-base";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { color } from "react-native-reanimated";
 
 // BACKGROUND IMAGES
 const christmas = require("../../assets/images/Jokes/Christmas.jpg");

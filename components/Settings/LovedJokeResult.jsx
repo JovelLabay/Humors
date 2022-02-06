@@ -1,5 +1,5 @@
 // REACT
-import React, { useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -7,10 +7,9 @@ import {
   TouchableOpacity,
   ActionSheetIOS,
   Alert,
-  Button,
 } from "react-native";
 
-import { Avatar, Box, HStack, Skeleton, Toast, VStack } from "native-base";
+import { Avatar, Box, Toast } from "native-base";
 
 // ICONS
 import { MaterialIcons } from "@expo/vector-icons";

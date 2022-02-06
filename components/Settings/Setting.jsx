@@ -5,8 +5,6 @@ import {
   Text,
   View,
   ScrollView,
-  FlatList,
-  Button,
   Pressable,
   TouchableOpacity,
 } from "react-native";
@@ -19,13 +17,9 @@ import { Entypo } from "@expo/vector-icons";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
-import MainNav from "../MainNav";
-import LovedJokeResult, { Mama } from "./LovedJokeResult";
 
 import { FontAwesome } from "@expo/vector-icons";
 
-// COMPONENT
-import JokesCategory from "./JokesCategory";
 import { Box, Center, HStack } from "native-base";
 
 const settingOptions = [
