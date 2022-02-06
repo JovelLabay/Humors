@@ -27,6 +27,7 @@ import { FontAwesome } from "@expo/vector-icons";
 // COMPONENT
 import JokesCategory from "./JokesCategory";
 import { Box, Center, HStack } from "native-base";
+import Auth from "../Account/Auth";
 
 const settingOptions = [
   { id: 10, title: "Accounts" },
@@ -132,8 +133,8 @@ const LovedJokesScreen = ({ navigation }) => {
 const MyModalScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
+      <Auth />
       <StatusBar style="light" />
-      <Text>Modal</Text>
     </View>
   );
 };

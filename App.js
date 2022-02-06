@@ -14,6 +14,8 @@ import MyDrawer from "./screens/Drawer/MyDrawer";
 // NATIVE BASE
 import { NativeBaseProvider } from "native-base";
 
+import { StoreContext } from "./components/StoreContext";
+
 // EXPORT DEFAULT
 export default function App() {
   // CUSTOM FONTS

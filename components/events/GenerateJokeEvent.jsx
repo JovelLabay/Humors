@@ -20,6 +20,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { colors, fontSizes } from "../../styles/Styles";
 
 import ResultJokeEvent from "./ResultJokeEvent";
+import { StoreContext } from "../StoreContext";
 
 const GenerateJokeEvent = ({ route }) => {
   // SELECT YOUR JOKE
