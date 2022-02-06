@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 
 // NATIVE BASE
-import { Skeleton, VStack, Center, Box } from "native-base";
+import { Skeleton, VStack, HStack, Center, Box } from "native-base";
 
 // STYLES
 import { colors } from "../../styles/Styles";
@@ -36,4 +36,39 @@ const GenerateCustomJoke = () => {
   );
 };
 
-export { GenerateCustomJoke };
+const LovedJoke = () => {
+  return (
+    <View>
+      <HStack
+        h={100}
+        alignItems="center"
+        paddingX={3}
+        marginX={2}
+        marginY={5}
+        rounded="xl"
+      >
+        <Skeleton size="16" rounded="full" />
+        <VStack paddingX={3} w="100%">
+          <Skeleton h={4} w="80%" rounded="full" my={2} />
+          <Skeleton h={4} w="80%" rounded="full" my={2} />
+        </VStack>
+      </HStack>
+      <HStack
+        h={100}
+        alignItems="center"
+        paddingX={3}
+        marginX={2}
+        marginY={5}
+        rounded="xl"
+      >
+        <Skeleton size="16" rounded="full" />
+        <VStack paddingX={3} w="100%">
+          <Skeleton h={4} w="80%" rounded="full" my={2} />
+          <Skeleton h={4} w="80%" rounded="full" my={2} />
+        </VStack>
+      </HStack>
+    </View>
+  );
+};
+
+export { GenerateCustomJoke, LovedJoke };

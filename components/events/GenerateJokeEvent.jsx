@@ -1,6 +1,5 @@
 // REACT
-
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -19,8 +18,8 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
+
 import ResultJokeEvent from "./ResultJokeEvent";
-import { GenerateCustomJoke } from "../Loader/Loader";
 
 const GenerateJokeEvent = ({ route }) => {
   // SELECT YOUR JOKE

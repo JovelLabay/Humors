@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Text } from "react-native";
 
 // NATIVE BASE
-import { Box, Flex, Spinner, HStack, Heading } from "native-base";
+import { Box, Flex, Spinner, HStack, Heading, Badge } from "native-base";
 
 // STYLES
 import { colors, fontSizes } from "../styles/Styles";
@@ -25,18 +25,18 @@ const Menus = ({ styles }) => {
     },
   };
 
-  axios
-    .request()
-    .then(function (response) {
-      const { book, chapter, number, testament, verse } =
-        response.data.contents;
-      setBibleVerse(verse);
-      setBibleBook(`${book} ${chapter} : ${number}`);
-      console.log(verse);
-    })
-    .catch(function (error) {
-      console.error(error.message);
-    });
+  // axios
+  //   .request(options)
+  //   .then(function (response) {
+  //     const { book, chapter, number, testament, verse } =
+  //       response.data.contents;
+  //     setBibleVerse(verse);
+  //     setBibleBook(`${book} ${chapter} : ${number}`);
+  //     console.log(verse);
+  //   })
+  //   .catch(function (error) {
+  //     console.error(error.message);
+  //   });
   return (
     <>
       <Box
@@ -48,7 +48,18 @@ const Menus = ({ styles }) => {
         rounded="xl"
         bg="success.50"
         shadow="5"
+        position="relative"
       >
+        <Badge
+          position="absolute"
+          top="1"
+          right="1"
+          bg="red.400"
+          rounded="full"
+        >
+          Not Available
+        </Badge>
+
         <Text style={styles.mainDesBible}>
           {bibleVerse === "" ? (
             <HStack space={2} alignItems="center">
@@ -56,6 +67,7 @@ const Menus = ({ styles }) => {
                 accessibilityLabel="Loading posts"
                 color={colors.primary}
               />
+
               <Heading color={colors.primary} fontSize={fontSizes.regular}>
                 Bible is unavailable.
               </Heading>

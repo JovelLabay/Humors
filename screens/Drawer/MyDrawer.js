@@ -1,14 +1,11 @@
 // REACT NATIVE
-import React, { useState } from "react";
+import React from "react";
 import { Text, View } from "react-native";
-
-import * as WebBrowser from "expo-web-browser";
 
 // NAVIGATOR
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
-  DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
 
@@ -16,20 +13,15 @@ import {
 import JokeScreen from "../JokeScreen";
 import QuoteScreen from "../QuoteScreen";
 import HomeScreen from "../HomeScreen";
-import LovedScreen from "../LovedScreen";
+import SettingScreen from "../SettingScreen";
 
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
 
 // ICONS
-import {
-  Feather,
-  MaterialCommunityIcons,
-  SimpleLineIcons,
-  Ionicons,
-} from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Avatar, Badge, Image } from "native-base";
+import { Image } from "native-base";
 
 // HOME SCREEN
 function Home({ navigation }) {
@@ -45,33 +37,23 @@ function Joke({ navigation }) {
 function Quote({ navigation }) {
   return <QuoteScreen navigation={navigation} />;
 }
-// LOVED SCREEN
-function Loved({ navigation }) {
-  return <LovedScreen navigation={navigation} />;
+// SETTINGS SCREEN
+function Settings({ navigation }) {
+  return <SettingScreen navigation={navigation} />;
 }
 
 // ADDITIONAL DRAWER MENU
 function Help(props) {
-  // Image logo
+  // IMAGE LOGO
   const logoImage = require("../../assets/Humors.png");
-
-  const [result, setResult] = useState(null);
-
-  const handlePressButtonAsync = async () => {
-    let result = await WebBrowser.openBrowserAsync(
-      "https://jovellabay.vercel.app"
-    );
-    setResult(result);
-  };
-
   return (
     <DrawerContentScrollView {...props}>
       {/* DRAWER TITLE */}
       <View style={{ padding: 30, alignItems: "center" }}>
-        <Image alt="logo" source={logoImage} borderRadius={100} size="lg" />
+        <Image alt="logo" source={logoImage} borderRadius={100} size="md" />
         <Text
           style={{
-            marginVertical: 5,
+            marginVertical: 20,
             fontSize: fontSizes.regular,
             color: colors.secondary,
           }}
@@ -80,38 +62,6 @@ function Help(props) {
         </Text>
       </View>
       <DrawerItemList {...props} />
-
-      {/* HELP */}
-      <DrawerItem
-        onPress={() => handlePressButtonAsync()}
-        style={{
-          borderWidth: 2,
-          borderColor: colors.secondary,
-          marginTop: 20,
-        }}
-        labelStyle={{
-          color: colors.primary,
-        }}
-        label="Help"
-        icon={() => (
-          <SimpleLineIcons name="question" size={22} color={colors.primary} />
-        )}
-      />
-
-      {/* READ POLICY */}
-      <DrawerItem
-        style={{
-          borderWidth: 2,
-          borderColor: colors.secondary,
-        }}
-        labelStyle={{
-          color: colors.primary,
-        }}
-        label="Read Policy"
-        icon={() => (
-          <Ionicons name="document-outline" size={24} color={colors.primary} />
-        )}
-      />
     </DrawerContentScrollView>
   );
 }
@@ -157,7 +107,7 @@ export default function MyDrawer() {
         name="Joke"
         component={Joke}
         options={{
-          title: "Jokes",
+          title: "Customize Jokes",
           drawerIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="gamepad-circle-outline"
@@ -167,11 +117,11 @@ export default function MyDrawer() {
           ),
         }}
       />
-      {/* <Drawer.Screen
+      <Drawer.Screen
         name="Quote"
         component={Quote}
         options={{
-          title: "Quotes",
+          title: "Generate Quotes",
           drawerIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="format-quote-open-outline"
@@ -180,15 +130,15 @@ export default function MyDrawer() {
             />
           ),
         }}
-      /> */}
+      />
       <Drawer.Screen
-        name="Loved"
-        component={Loved}
+        name="Settings"
+        component={Settings}
         options={{
-          title: "Loved",
+          title: "Settings",
           drawerIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="cellphone-settings"
+            <Feather
+              name="settings"
               size={22}
               color={focused ? colors.mainBackground : colors.primary}
             />

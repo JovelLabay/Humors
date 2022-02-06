@@ -82,7 +82,7 @@ const ResultJokeEvent = ({
           },
         },
       ]);
-    }, 2000);
+    }, 3000);
   }
 
   // LIKE ME

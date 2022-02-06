@@ -1,15 +1,21 @@
 // REACT
 import React from "react";
-import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Text,
+} from "react-native";
 
 // NATIVE BASE
-import { Text } from "native-base";
+import { Center } from "native-base";
 
 // STYLES
 import { colors, fontSizes } from "../styles/Styles";
 
 // ICONS
-import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, Feather } from "@expo/vector-icons";
 
 // UTILITIES
 import appJson from "../app.json";
@@ -19,7 +25,7 @@ const myDate = new Date().getHours();
 let greeting =
   myDate <= 11
     ? "Good Morning"
-    : myDate <= 17
+    : myDate <= 16
     ? "Good Afternnon"
     : "Good Evening";
 
@@ -36,8 +42,16 @@ const MainNav = ({ navigation }) => {
             <Text style={styles.titleSublogo}>{greeting}</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Loved")}>
-          <FontAwesome name="heart-o" size={24} color={colors.primary} />
+        <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+          <Center
+            bg={colors.secondary}
+            p={1.5}
+            rounded="full"
+            flexDirection="row"
+          >
+            <Feather name="settings" size={20} color={colors.mainBackground} />
+            <Text style={styles.settings}>Settings</Text>
+          </Center>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -59,6 +73,10 @@ const styles = StyleSheet.create({
   leftNav: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  settings: {
+    marginLeft: 4,
+    color: colors.mainBackground,
   },
   titles: {
     marginLeft: 10,

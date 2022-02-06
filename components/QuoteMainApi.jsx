@@ -38,16 +38,16 @@ const QuotemainApi = ({ navigation, styles }) => {
     },
   };
 
-  axios
-    .request()
-    .then(function (response) {
-      const { author, text } = response.data;
-      setText(text);
-      setAuthor(author);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
+  // axios
+  //   .request(options)
+  //   .then(function (response) {
+  //     const { author, text } = response.data;
+  //     setText(text);
+  //     setAuthor(author);
+  //   })
+  //   .catch(function (error) {
+  //     console.error(error);
+  //   });
 
   return (
     <>
@@ -80,13 +80,13 @@ const QuotemainApi = ({ navigation, styles }) => {
             disabled={true}
             onPress={() => navigation.navigate("Quote")}
           >
-            {/* <Center size="12" bg={colors.secondary} rounded="full">
+            <Center size="12" bg={colors.secondary} rounded="full">
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
                 color={colors.mainBackground}
               />
-            </Center> */}
+            </Center>
           </TouchableOpacity>
         </Flex>
       </Box>
