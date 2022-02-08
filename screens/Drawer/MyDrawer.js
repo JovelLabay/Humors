@@ -1,13 +1,18 @@
 // REACT NATIVE
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useState } from "react";
+import { Text, View, TextInput, Button } from "react-native";
+
+import { authentication } from "../../firebase/firebase.config";
 
 // NAVIGATOR
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
+  DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
+
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // SCREENS
 import JokeScreen from "../JokeScreen";
@@ -18,133 +23,174 @@ import SettingScreen from "../SettingScreen";
 // STYLES
 import { colors, fontSizes } from "../../styles/Styles";
 
+import { useNavigation } from "@react-navigation/core";
+
 // ICONS
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Image } from "native-base";
+import { StatusBar } from "expo-status-bar";
+import Welcome from "../../components/LogSign/Welcome";
+import LogSign from "../../components/LogSign/LogSign";
 
-// HOME SCREEN
-function Home({ navigation }) {
-  return <HomeScreen navigation={navigation} />;
-}
+const Seconday = () => {
+  const Drawer = createDrawerNavigator();
 
-// JOKE SCREEN
-function Joke({ navigation }) {
-  return <JokeScreen navigation={navigation} />;
-}
+  // ADDITIONAL DRAWER COMPONENTS
+  function Help(props) {
+    // IMAGE LOGO
+    const logoImage = require("../../assets/Humors.png");
 
-// QOUTE SCREEN
-function Quote({ navigation }) {
-  return <QuoteScreen navigation={navigation} />;
-}
-// SETTINGS SCREEN
-function Settings({ navigation }) {
-  return <SettingScreen navigation={navigation} />;
-}
+    // NAVIGATION
+    const navigation = useNavigation();
+    const handleSignOut = () => {
+      authentication
+        .signOut()
+        .then(() => {
+          navigation.replace("LogSign");
+        })
+        .catch((error) => alert(error.message));
+    };
 
-// ADDITIONAL DRAWER MENU
-function Help(props) {
-  // IMAGE LOGO
-  const logoImage = require("../../assets/Humors.png");
-  return (
-    <DrawerContentScrollView {...props}>
-      {/* DRAWER TITLE */}
-      <View style={{ padding: 30, alignItems: "center" }}>
-        <Image alt="logo" source={logoImage} borderRadius={100} size="md" />
-        <Text
+    const { email, uid } = authentication.currentUser;
+    return (
+      <View style={{ flex: 1 }}>
+        <DrawerContentScrollView {...props}>
+          {/* APP TITLE */}
+          <View style={{ padding: 30, alignItems: "center" }}>
+            <Image alt="logo" source={logoImage} borderRadius={100} size="md" />
+            <Text
+              style={{
+                marginVertical: 20,
+                fontSize: fontSizes.regular,
+                color: colors.secondary,
+              }}
+            >
+              Humors you loved
+            </Text>
+          </View>
+          <DrawerItemList {...props} />
+        </DrawerContentScrollView>
+        <View
           style={{
-            marginVertical: 20,
-            fontSize: fontSizes.regular,
-            color: colors.secondary,
+            position: "absolute",
+            bottom: 0,
           }}
         >
-          Humors you loved
-        </Text>
+          <Text onPress={() => handleSignOut()}>Logout</Text>
+          <Text>
+            {"Email: "}
+            {email}
+          </Text>
+          <Text>
+            {"ID No: "}
+            {uid}
+          </Text>
+        </View>
       </View>
-      <DrawerItemList {...props} />
-    </DrawerContentScrollView>
-  );
-}
+    );
+  }
 
-const Drawer = createDrawerNavigator();
+  return (
+    <>
+      <StatusBar hidden={false} />
+      <Drawer.Navigator
+        // ADDITIONAL DRAWER MENU
+        drawerContent={(props) => <Help {...props} />}
+        screenOptions={{
+          // PROPS FOR THE DRAWER
+          header: () => null,
+          // STYLESHEETS FOR THE DRAWER
+          drawerStyle: {
+            paddingHorizontal: 20,
+            paddingVertical: 30,
+            backgroundColor: colors.mainBackground,
+          },
+          drawerActiveBackgroundColor: colors.secondary,
+          drawerActiveTintColor: colors.mainBackground,
+          drawerInactiveTintColor: colors.primary,
+          drawerType: "back",
+          overlayColor: colors.mainBackground,
+        }}
+      >
+        <Drawer.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: "Home",
+            drawerIcon: ({ focused }) => (
+              <Feather
+                name="home"
+                size={22}
+                color={focused ? colors.mainBackground : colors.primary}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Joke"
+          component={JokeScreen}
+          options={{
+            title: "Customize Jokes",
+            drawerIcon: ({ focused }) => (
+              <MaterialCommunityIcons
+                name="gamepad-circle-outline"
+                size={22}
+                color={focused ? colors.mainBackground : colors.primary}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Quote"
+          component={QuoteScreen}
+          options={{
+            title: "Generate Quotes",
+            drawerIcon: ({ focused }) => (
+              <MaterialCommunityIcons
+                name="format-quote-open-outline"
+                size={22}
+                color={focused ? colors.mainBackground : colors.primary}
+              />
+            ),
+          }}
+        />
+        <Drawer.Screen
+          name="Settings"
+          component={SettingScreen}
+          options={{
+            title: "Settings",
+            drawerIcon: ({ focused }) => (
+              <Feather
+                name="settings"
+                size={22}
+                color={focused ? colors.mainBackground : colors.primary}
+              />
+            ),
+          }}
+        />
+      </Drawer.Navigator>
+    </>
+  );
+};
+
+const Stack = createNativeStackNavigator();
 
 export default function MyDrawer() {
   return (
-    <Drawer.Navigator
-      // ADDITIONAL DRAWER MENU
-      drawerContent={(props) => <Help {...props} />}
-      screenOptions={{
-        // PROPS FOR THE DRAWER
-        header: () => null,
-        // STYLESHEETS FOR THE DRAWER
-        drawerStyle: {
-          paddingHorizontal: 20,
-          paddingVertical: 30,
-          backgroundColor: colors.mainBackground,
-        },
-        drawerActiveBackgroundColor: colors.secondary,
-        drawerActiveTintColor: colors.mainBackground,
-        drawerInactiveTintColor: colors.primary,
-        drawerType: "back",
-        overlayColor: colors.mainBackground,
-      }}
-    >
-      <Drawer.Screen
-        name="Home"
-        component={Home}
-        options={{
-          title: "Home",
-          drawerIcon: ({ focused }) => (
-            <Feather
-              name="home"
-              size={22}
-              color={focused ? colors.mainBackground : colors.primary}
-            />
-          ),
+    <>
+      <StatusBar hidden={true} />
+      <Stack.Navigator
+        screenOptions={{
+          header: () => null,
+          gestureEnabled: false,
+          animation: "fade_from_bottom",
         }}
-      />
-      <Drawer.Screen
-        name="Joke"
-        component={Joke}
-        options={{
-          title: "Customize Jokes",
-          drawerIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="gamepad-circle-outline"
-              size={22}
-              color={focused ? colors.mainBackground : colors.primary}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Quote"
-        component={Quote}
-        options={{
-          title: "Generate Quotes",
-          drawerIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="format-quote-open-outline"
-              size={22}
-              color={focused ? colors.mainBackground : colors.primary}
-            />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="Settings"
-        component={Settings}
-        options={{
-          title: "Settings",
-          drawerIcon: ({ focused }) => (
-            <Feather
-              name="settings"
-              size={22}
-              color={focused ? colors.mainBackground : colors.primary}
-            />
-          ),
-        }}
-      />
-    </Drawer.Navigator>
+      >
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="LogSign" component={LogSign} />
+        <Stack.Screen name="Secondary" component={Seconday} />
+      </Stack.Navigator>
+    </>
   );
 }

@@ -21,7 +21,7 @@ import { colors, fontSizes } from "../../styles/Styles";
 
 import ResultJokeEvent from "./ResultJokeEvent";
 
-const GenerateJokeEvent = ({ route }) => {
+const GenerateJokeEvent = ({ route, navigation }) => {
   // SELECT YOUR JOKE
   const { flags, name } = route.params;
 
@@ -101,7 +101,7 @@ const GenerateJokeEvent = ({ route }) => {
     <>
       <Box>
         {/* READ FIRST DOCUMENT */}
-        <Text style={styles.mainTitleGenerate}>{name}</Text>
+        {/* <Text style={styles.mainTitleGenerate}>{name}</Text> */}
         <Flex
           paddingY={2}
           justifyContent="space-between"

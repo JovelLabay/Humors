@@ -61,7 +61,18 @@ export default function Joke() {
       <Stack.Screen
         name="Generate Joke"
         component={GenerateJoke}
-        options={{
+        // options={{
+        // headerStyle: {
+        //   backgroundColor: colors.mainBackground,
+        // },
+        // headerTintColor: colors.primary,
+        // headerTitleStyle: {
+        //   fontFamily: "robotoRegular",
+        // },
+        // headerBackTitleVisible: false,
+        // }}
+        options={({ route }) => ({
+          title: route.params.name,
           headerStyle: {
             backgroundColor: colors.mainBackground,
           },
@@ -70,7 +81,7 @@ export default function Joke() {
             fontFamily: "robotoRegular",
           },
           headerBackTitleVisible: false,
-        }}
+        })}
       />
     </Stack.Navigator>
   );

@@ -42,7 +42,7 @@ const MainNav = ({ navigation }) => {
             <Text style={styles.titleSublogo}>{greeting}</Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
           <Center
             bg={colors.secondary}
             p={1.5}
@@ -52,7 +52,7 @@ const MainNav = ({ navigation }) => {
             <Feather name="settings" size={20} color={colors.mainBackground} />
             <Text style={styles.settings}>Settings</Text>
           </Center>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </SafeAreaView>
   );

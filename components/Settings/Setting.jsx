@@ -7,6 +7,7 @@ import {
   ScrollView,
   Pressable,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 
 // EXPO
@@ -21,6 +22,8 @@ import { colors, fontSizes } from "../../styles/Styles";
 import { FontAwesome } from "@expo/vector-icons";
 
 import { Box, Center, HStack } from "native-base";
+
+import { authentication } from "../../firebase/firebase.config";
 
 const settingOptions = [
   { id: 10, title: "Accounts" },
@@ -124,11 +127,40 @@ const LovedJokesScreen = ({ navigation }) => {
 
 // MODAL
 const MyModalScreen = ({ navigation }) => {
+  const handleSignOut = () => {
+    authentication
+      .signOut()
+      .then(() => {
+        navigation.replace("LogSign");
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const { email, uid, providerId } = authentication.currentUser;
+
+  const colorScheme = useColorScheme();
+
+  const themeTextStyle =
+    colorScheme === "light" ? styles2.lightThemeText : styles2.darkThemeText;
+  const themeContainerStyle =
+    colorScheme === "light" ? styles2.lightContainer : styles2.darkContainer;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles2.container2, themeContainerStyle]}>
       <StatusBar style="light" />
-      <Text>Modal</Text>
+      <Text style={[styles2.text, themeTextStyle]}>
+        Color scheme: {colorScheme}
+      </Text>
+      <Text style={[styles2.text2, themeTextStyle]}>sdfsdf</Text>
     </View>
+
+    // <View style={[styles2.constainerMe, themeTextStyle]}>
+    //   {/* <StatusBar style="light" /> */}
+    //   <Text onPress={() => handleSignOut()}>Logout</Text>
+    //   <Text>{email}</Text>
+    //   <Text>{uid}</Text>
+    //   <Text>{providerId}</Text>
+    // </View>
   );
 };
 
@@ -161,7 +193,7 @@ export default function Setting() {
         component={MyModalScreen}
         options={({ navigation }) => ({
           presentation: "modal",
-          title: "Account",
+          title: "Accounts",
           headerTintColor: colors.primary,
           headerRight: () => (
             <Pressable onPress={() => navigation.goBack()}>
@@ -176,21 +208,42 @@ export default function Setting() {
   );
 }
 
-// STYLESHEET
-const styles = StyleSheet.create({
-  container: {
+const styles2 = StyleSheet.create({
+  container2: {
     flex: 1,
+  },
+  text2: {
+    fontSize: 50,
+  },
+  lightContainer: {
     backgroundColor: colors.mainBackground,
   },
-  mainIntro: {
-    marginVertical: 10,
-    marginHorizontal: 20,
+  darkContainer: {
+    backgroundColor: colors.primary,
   },
-  // TITLE
-  title: {
-    fontSize: fontSizes.title,
-    fontFamily: "robotoBold",
+  lightThemeText: {
     color: colors.primary,
-    marginHorizontal: 10,
   },
+  darkThemeText: {
+    color: colors.mainBackground,
+  },
+});
+
+// STYLESHEET
+const styles = StyleSheet.create({
+  // container: {
+  //   flex: 1,
+  //   backgroundColor: colors.mainBackground,
+  // },
+  // mainIntro: {
+  //   marginVertical: 10,
+  //   marginHorizontal: 20,
+  // },
+  // // TITLE
+  // title: {
+  //   fontSize: fontSizes.title,
+  //   fontFamily: "robotoBold",
+  //   color: colors.primary,
+  //   marginHorizontal: 10,
+  // },
 });
