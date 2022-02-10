@@ -33,7 +33,7 @@ import { StatusBar } from "expo-status-bar";
 import Welcome from "../../components/LogSign/Welcome";
 import LogSign from "../../components/LogSign/LogSign";
 
-const Seconday = () => {
+export const Seconday = () => {
   const Drawer = createDrawerNavigator();
 
   // ADDITIONAL DRAWER COMPONENTS

@@ -21,40 +21,57 @@ import { colors } from "../../styles/Styles";
 
 import { authentication } from "../../firebase/firebase.config";
 
-import AppLoading from "expo-app-loading";
+import { Seconday } from "../../screens/Drawer/MyDrawer";
 
 const logoImage = require("../../assets/Humors.png");
 
 const Welcome = () => {
   const navigation = useNavigation();
 
-  useEffect(() => {
-    const unsubscribe = authentication.onAuthStateChanged((user) => {
-      if (user) {
-        navigation.replace("Secondary");
-      }
-    });
+  const [initializing, setInitializing] = React.useState(true);
+  const [user, setUser] = React.useState();
 
-    return unsubscribe;
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+
+  useEffect(() => {
+    const subscriber = authentication.onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
   }, []);
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.getStarted}>
-        <TouchableOpacity
-          style={styles.getStartedBtn}
-          onPress={() => navigation.navigate("LogSign")}
-        >
-          <Text style={{ color: colors.mainBackground }}>Get Started</Text>
-          <Entypo
-            name="chevron-right"
-            size={24}
-            color={colors.mainBackground}
-          />
-        </TouchableOpacity>
+  if (initializing) return null;
+
+  if (!user) {
+    return (
+      <View>
+        <Text onPress={() => navigation.navigate("LogSign")}>Login</Text>
       </View>
-    </View>
-  );
+    );
+  }
+
+  return <Seconday />;
+
+  // return (
+  //   <View style={styles.container}>
+  //     <View style={styles.getStarted}>
+  //       <TouchableOpacity
+  //         style={styles.getStartedBtn}
+  //         onPress={() => navigation.navigate("LogSign")}
+  //       >
+  //         <Text style={{ color: colors.mainBackground }}>Get Started</Text>
+  //         <Entypo
+  //           name="chevron-right"
+  //           size={24}
+  //           color={colors.mainBackground}
+  //         />
+  //       </TouchableOpacity>
+  //     </View>
+  //   </View>
+  // );
 };
 
 const styles = StyleSheet.create({
@@ -82,3 +99,12 @@ const styles = StyleSheet.create({
 });
 
 export default Welcome;
+
+// useEffect(() => {
+//   const unsubscribe = authentication.onAuthStateChanged((user) => {
+//     if (user) {
+//       navigation.replace("Secondary");
+//     }
+//   });
+//   return unsubscribe;
+// }, []);
